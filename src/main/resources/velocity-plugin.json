@@ -1,0 +1,9 @@
+{
+  "id":"serverpermissions",
+  "name":"ServerPermissions",
+  "version":"${project.version}",
+  "description":"Add permissions to access your servers",
+  "authors":["4drian3d"],
+  "dependencies":[],
+  "main":"me.dreamerzero.serverpermissions.ServerPermissions"
+}
