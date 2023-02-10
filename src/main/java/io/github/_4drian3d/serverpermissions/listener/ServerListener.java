@@ -1,15 +1,15 @@
-package me.adrianed.serverpermissions.listener;
+package io.github._4drian3d.serverpermissions.listener;
 
 import com.google.inject.Inject;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.player.ServerPreConnectEvent;
 import com.velocitypowered.api.proxy.Player;
-import me.adrianed.serverpermissions.ServerPermissions;
+import io.github._4drian3d.serverpermissions.ServerPermissions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 
-public class ServerListener {
+public final class ServerListener {
     @Inject
     private ServerPermissions plugin;
 

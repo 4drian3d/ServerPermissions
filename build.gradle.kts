@@ -32,7 +32,7 @@ tasks {
 }
 
 blossom {
-    replaceTokenIn("src/main/java/me/adrianed/serverpermissions/utils/Constants.java")
+    replaceTokenIn("src/main/java/io/github/_4drian3d/serverpermissions/utils/Constants.java")
     replaceToken("{version}", project.version)
 }
 

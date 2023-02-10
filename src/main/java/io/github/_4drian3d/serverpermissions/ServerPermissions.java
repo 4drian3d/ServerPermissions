@@ -1,4 +1,4 @@
-package me.adrianed.serverpermissions;
+package io.github._4drian3d.serverpermissions;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -11,11 +11,11 @@ import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
-import me.adrianed.serverpermissions.listener.ServerListener;
-import me.adrianed.serverpermissions.utils.Constants;
+import io.github._4drian3d.serverpermissions.listener.ServerListener;
+import io.github._4drian3d.serverpermissions.utils.Constants;
 import org.slf4j.Logger;
 
-import me.adrianed.serverpermissions.config.Configuration;
+import io.github._4drian3d.serverpermissions.config.Configuration;
 
 @Plugin(
         id = "serverpermissions",

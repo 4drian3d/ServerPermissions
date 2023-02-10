@@ -1,4 +1,4 @@
-package me.adrianed.serverpermissions.config;
+package io.github._4drian3d.serverpermissions.config;
 
 import java.io.IOException;
 import java.nio.file.Files;
