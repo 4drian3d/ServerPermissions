@@ -17,6 +17,11 @@ public final class ServerListener {
 
     @Subscribe
     void onServerSwitch(final ServerPreConnectEvent event, final Continuation continuation) {
+        if (!event.getResult().isAllowed()) {
+            continuation.resume();
+            return;
+        }
+
         event.getResult().getServer().ifPresent(server -> {
             final Player player = event.getPlayer();
             final String serverName = server.getServerInfo().getName();
@@ -44,8 +49,7 @@ public final class ServerListener {
             }
 
             final Component message = miniMessage()
-                    .deserialize(plugin.configuration().noPermissionMessage(),
-                            Placeholder.unparsed("server", serverName));
+                    .deserialize(noPermissionMessage, Placeholder.unparsed("server", serverName));
             player.sendMessage(message);
             continuation.resume();
         });
