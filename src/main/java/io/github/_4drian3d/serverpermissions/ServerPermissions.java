@@ -39,7 +39,7 @@ public final class ServerPermissions {
     private Configuration configuration;
 
     @Subscribe
-    void onProxyInitialize(ProxyInitializeEvent event) {
+    void onProxyInitialize(final ProxyInitializeEvent event) {
         try {
             configuration = Configuration.loadConfig(path);
         } catch (IOException e) {

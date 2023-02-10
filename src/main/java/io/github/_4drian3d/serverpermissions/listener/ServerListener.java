@@ -1,6 +1,7 @@
 package io.github._4drian3d.serverpermissions.listener;
 
 import com.google.inject.Inject;
+import com.velocitypowered.api.event.Continuation;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.player.ServerPreConnectEvent;
 import com.velocitypowered.api.proxy.Player;
@@ -14,7 +15,7 @@ public final class ServerListener {
     private ServerPermissions plugin;
 
     @Subscribe
-    void onServerSwitch(ServerPreConnectEvent event) {
+    void onServerSwitch(final ServerPreConnectEvent event, final Continuation continuation) {
         event.getResult().getServer().ifPresent(server -> {
             final Player player = event.getPlayer();
             final String serverName = server.getServerInfo().getName();
@@ -27,5 +28,6 @@ public final class ServerListener {
                 player.sendMessage(message);
             }
         });
+        continuation.resume();
     }
 }
