@@ -5,12 +5,7 @@ plugins {
 }
 
 repositories {
-    maven("https://repo.papermc.io/repository/maven-public/") {
-        content {
-            includeGroup("com.velocitypowered")
-        }
-    }
-    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
