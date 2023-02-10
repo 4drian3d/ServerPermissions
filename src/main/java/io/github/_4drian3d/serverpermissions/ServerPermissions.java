@@ -22,6 +22,7 @@ import io.github._4drian3d.serverpermissions.config.Configuration;
         name = "ServerPermissions",
         version = Constants.VERSION,
         description = "Add permissions to access your servers",
+        url = "https://modrinth.com/plugin/serverpermissions",
         authors = {"4drian3d"}
 )
 public final class ServerPermissions {
@@ -48,7 +49,7 @@ public final class ServerPermissions {
 
         eventManager.register(this, injector.getInstance(ServerListener.class));
 
-        logger.info("ServerPermission has been correctly started");
+        logger.info("ServerPermissions has been correctly started");
     }
 
     public Configuration configuration() {

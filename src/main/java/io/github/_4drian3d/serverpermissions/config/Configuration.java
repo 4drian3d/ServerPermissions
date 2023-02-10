@@ -1,12 +1,12 @@
 package io.github._4drian3d.serverpermissions.config;
 
+import ninja.leaping.configurate.commented.CommentedConfigurationNode;
+import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Objects;
-
-import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
 
 public interface Configuration {
     String noPermissionMessage();
@@ -24,7 +24,7 @@ public interface Configuration {
         return () -> noPermissionMessage;
     }
 
-    private static Path loadFiles(Path path) throws IOException {
+    private static Path loadFiles(final Path path) throws IOException {
         if (Files.notExists(path)) {
             Files.createDirectory(path);
         }
