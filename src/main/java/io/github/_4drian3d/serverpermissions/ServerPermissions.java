@@ -8,6 +8,7 @@ import com.google.inject.Injector;
 import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
+import com.velocitypowered.api.plugin.Dependency;
 import com.velocitypowered.api.plugin.Plugin;
 
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
@@ -23,7 +24,8 @@ import io.github._4drian3d.serverpermissions.config.Configuration;
         version = Constants.VERSION,
         description = "Add permissions to access your servers",
         url = "https://modrinth.com/plugin/serverpermissions",
-        authors = {"4drian3d"}
+        authors = {"4drian3d"},
+        dependencies = { @Dependency(id = "miniplaceholders", optional = true) }
 )
 public final class ServerPermissions {
     @Inject

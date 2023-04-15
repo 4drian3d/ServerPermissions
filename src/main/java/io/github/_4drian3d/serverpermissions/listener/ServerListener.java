@@ -4,16 +4,21 @@ import com.google.inject.Inject;
 import com.velocitypowered.api.event.Continuation;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.player.ServerPreConnectEvent;
+import com.velocitypowered.api.plugin.PluginManager;
 import com.velocitypowered.api.proxy.Player;
 import io.github._4drian3d.serverpermissions.ServerPermissions;
+import io.github.miniplaceholders.api.MiniPlaceholders;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 public final class ServerListener {
     @Inject
     private ServerPermissions plugin;
+    @Inject
+    private PluginManager pluginManager;
 
     @Subscribe
     void onServerSwitch(final ServerPreConnectEvent event, final Continuation continuation) {
@@ -48,8 +53,14 @@ public final class ServerListener {
                 return;
             }
 
-            final Component message = miniMessage()
-                    .deserialize(noPermissionMessage, Placeholder.unparsed("server", serverName));
+            final TagResolver.Builder builder = TagResolver.builder()
+                    .resolver(Placeholder.unparsed("server", serverName));
+
+            if (pluginManager.isLoaded("miniplaceholders")) {
+                builder.resolver(MiniPlaceholders.getAudienceGlobalPlaceholders(player));
+            }
+
+            final Component message = miniMessage().deserialize(noPermissionMessage, builder.build());
             player.sendMessage(message);
             continuation.resume();
         });
