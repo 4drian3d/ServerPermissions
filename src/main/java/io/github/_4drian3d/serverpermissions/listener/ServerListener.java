@@ -56,6 +56,7 @@ public final class ServerListener {
             final TagResolver.Builder builder = TagResolver.builder()
                     .resolver(Placeholder.unparsed("server", serverName));
 
+            // MiniPlaceholders custom placeholders support
             if (pluginManager.isLoaded("miniplaceholders")) {
                 builder.resolver(MiniPlaceholders.getAudienceGlobalPlaceholders(player));
             }
