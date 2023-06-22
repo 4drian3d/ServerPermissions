@@ -30,7 +30,7 @@ public interface Configuration {
         }
         final Path configPath = path.resolve("config.conf");
         if (Files.notExists(configPath)) {
-            try (var stream = Configuration.class.getClassLoader().getResourceAsStream("config.conf")) {
+            try (final var stream = Configuration.class.getClassLoader().getResourceAsStream("config.conf")) {
                 Files.copy(Objects.requireNonNull(stream), configPath);
             }
         }

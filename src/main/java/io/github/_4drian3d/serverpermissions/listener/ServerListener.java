@@ -26,7 +26,7 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
     }
 
     @Override
-    public EventTask executeAsync(ServerPreConnectEvent event) {
+    public EventTask executeAsync(final ServerPreConnectEvent event) {
         return EventTask.withContinuation(continuation -> {
             if (!event.getResult().isAllowed()) {
                 continuation.resume();
