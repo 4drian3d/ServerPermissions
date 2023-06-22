@@ -17,7 +17,7 @@ dependencies {
 tasks {
     compileJava {
         options.encoding = Charsets.UTF_8.name()
-        options.release.set(11)
+        options.release.set(17)
     }
     clean {
         delete("run")
@@ -32,4 +32,4 @@ blossom {
     replaceToken("{version}", project.version)
 }
 
-java.toolchain.languageVersion.set(JavaLanguageVersion.of(11))
+java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
