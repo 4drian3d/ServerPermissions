@@ -5,7 +5,6 @@ import java.nio.file.Path;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.velocitypowered.api.event.EventManager;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Dependency;
@@ -34,8 +33,6 @@ public final class ServerPermissions {
     @DataDirectory
     private Path path;
     @Inject
-    private EventManager eventManager;
-    @Inject
     private Injector injector;
 
     private Configuration configuration;
@@ -49,7 +46,7 @@ public final class ServerPermissions {
             return;
         }
 
-        eventManager.register(this, injector.getInstance(ServerListener.class));
+        injector.getInstance(ServerListener.class).register();
 
         logger.info("ServerPermissions has been correctly started");
     }
