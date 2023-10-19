@@ -16,22 +16,26 @@ import net.kyori.adventure.text.minimessage.tag.resolver.ArgumentQueue;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 public final class ServerListener implements AwaitingEventExecutor<ServerPreConnectEvent> {
     private final ServerPermissions plugin;
     private final EventManager eventManager;
+    private final Logger logger;
     private final boolean hasMiniPlaceholders;
 
     @Inject
     public ServerListener(
             final ServerPermissions plugin,
             final PluginManager pluginManager,
-            final EventManager eventManager
+            final EventManager eventManager,
+            final Logger logger
     ) {
         this.plugin = plugin;
         this.eventManager = eventManager;
+        this.logger = logger;
         this.hasMiniPlaceholders = pluginManager.isLoaded("miniplaceholders");
     }
 
@@ -63,6 +67,8 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
             // In case the server to which the player is connecting is the initial one,
             // it is not necessary to send the message as the player will not see it
             if (event.getPreviousServer() == null) {
+                logger.warn("The first server connection of player {} has been denied.", player.getUsername());
+                logger.warn("Note that this will cause it to be unable to connect to any server.");
                 return;
             }
 
