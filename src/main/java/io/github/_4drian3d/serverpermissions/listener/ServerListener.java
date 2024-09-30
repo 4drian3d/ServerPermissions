@@ -64,14 +64,6 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
             // If the player does not have permission, access to the server is denied
             event.setResult(ServerPreConnectEvent.ServerResult.denied());
 
-            // In case the server to which the player is connecting is the initial one,
-            // it is not necessary to send the message as the player will not see it
-            if (event.getPreviousServer() == null) {
-                logger.warn("The first server connection of player {} has been denied.", player.getUsername());
-                logger.warn("Note that this will cause it to be unable to connect to any server.");
-                return;
-            }
-
             final String noPermissionMessage = plugin.configuration().noPermissionMessage();
             // If the message is empty, it avoids sending to the player
             if (noPermissionMessage.isBlank()) {
@@ -87,7 +79,13 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
             }
 
             final Component message = miniMessage().deserialize(noPermissionMessage, builder.build());
-            player.sendMessage(message);
+
+            // if it is the initial connection, we disconnect the player from the proxy so they do not time out
+            if (event.getPreviousServer() == null) {
+                player.disconnect(message);
+            } else {
+                player.sendMessage(message);
+            }
         });
     }
 
