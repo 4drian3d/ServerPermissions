@@ -61,12 +61,21 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
                 return;
             }
 
+            final RegisteredServer oldServer = event.getPreviousServer();
+
             // If the player does not have permission, access to the server is denied
             event.setResult(ServerPreConnectEvent.ServerResult.denied());
 
             final String noPermissionMessage = plugin.configuration().noPermissionMessage();
             // If the message is empty, it avoids sending to the player
             if (noPermissionMessage.isBlank()) {
+                // if it is the initial connection, we disconnect the player from the proxy so they do not time out
+                if (oldServer == null) {
+                    player.disconnect(Component.translatable()
+                            .key("velocity.error.connecting-server-error")
+                            .args(Component.text(serverName))
+                            .build());
+                }
                 return;
             }
 
