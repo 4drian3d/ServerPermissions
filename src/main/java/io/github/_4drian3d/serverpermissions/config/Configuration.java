@@ -11,6 +11,8 @@ import java.util.Objects;
 public interface Configuration {
     String noPermissionMessage();
 
+    boolean shouldLogConnectionsAttempts();
+
     static Configuration loadConfig(final Path path) throws IOException {
         final Path configPath = loadFiles(path);
         final HoconConfigurationLoader loader = HoconConfigurationLoader.builder()
@@ -20,8 +22,19 @@ public interface Configuration {
         final CommentedConfigurationNode loaded = loader.load();
 
         final String noPermissionMessage = loaded.getNode("no-permission-message").getString("");
+        final boolean shouldLogConnectionsAttempts = loaded.getNode("should-log-connections-attempts").getBoolean(false);
 
-        return () -> noPermissionMessage;
+        return new Configuration() {
+            @Override
+            public String noPermissionMessage() {
+                return noPermissionMessage;
+            }
+
+            @Override
+            public boolean shouldLogConnectionsAttempts() {
+                return shouldLogConnectionsAttempts;
+            }
+        };
     }
 
     private static Path loadFiles(final Path path) throws IOException {

@@ -71,6 +71,7 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
             if (noPermissionMessage.isBlank()) {
                 // if it is the initial connection, we disconnect the player from the proxy so they do not time out
                 if (oldServer == null) {
+                    this.logPlayerIntent(player, serverName);
                     player.disconnect(Component.translatable()
                             .key("velocity.error.connecting-server-error")
                             .args(Component.text(serverName))
@@ -89,6 +90,8 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
 
             final Component message = miniMessage().deserialize(noPermissionMessage, builder.build());
 
+            this.logPlayerIntent(player, serverName);
+
             // if it is the initial connection, we disconnect the player from the proxy so they do not time out
             if (event.getPreviousServer() == null) {
                 player.disconnect(message);
@@ -96,6 +99,13 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
                 player.sendMessage(message);
             }
         });
+    }
+
+    private void logPlayerIntent(Player player, String serverName) {
+        if (!plugin.configuration().shouldLogConnectionsAttempts()) {
+            return;
+        }
+        logger.info("{} tried to enter the {} server without permission to do so", player.getUsername(), serverName);
     }
 
     private record ServerResolver(String server) implements TagResolver {
