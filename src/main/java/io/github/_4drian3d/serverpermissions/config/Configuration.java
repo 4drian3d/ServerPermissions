@@ -1,7 +1,7 @@
 package io.github._4drian3d.serverpermissions.config;
 
-import ninja.leaping.configurate.commented.CommentedConfigurationNode;
-import ninja.leaping.configurate.hocon.HoconConfigurationLoader;
+import org.spongepowered.configurate.CommentedConfigurationNode;
+import org.spongepowered.configurate.hocon.HoconConfigurationLoader;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,13 +16,13 @@ public interface Configuration {
     static Configuration loadConfig(final Path path) throws IOException {
         final Path configPath = loadFiles(path);
         final HoconConfigurationLoader loader = HoconConfigurationLoader.builder()
-                .setPath(configPath)
+                .path(configPath)
                 .build();
 
         final CommentedConfigurationNode loaded = loader.load();
 
-        final String noPermissionMessage = loaded.getNode("no-permission-message").getString("");
-        final boolean shouldLogConnectionsAttempts = loaded.getNode("should-log-connections-attempts").getBoolean(false);
+        final String noPermissionMessage = loaded.node("no-permission-message").getString("");
+        final boolean shouldLogConnectionsAttempts = loaded.node("should-log-connections-attempts").getBoolean(false);
 
         return new Configuration() {
             @Override

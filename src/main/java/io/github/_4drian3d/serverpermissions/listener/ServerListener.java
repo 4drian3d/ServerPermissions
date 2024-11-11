@@ -74,7 +74,7 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
                     this.logPlayerIntent(player, serverName);
                     player.disconnect(Component.translatable()
                             .key("velocity.error.connecting-server-error")
-                            .args(Component.text(serverName))
+                            .arguments(Component.text(serverName))
                             .build());
                 }
                 return;
