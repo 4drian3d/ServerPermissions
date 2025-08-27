@@ -85,10 +85,10 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
 
             // MiniPlaceholders custom placeholders support
             if (hasMiniPlaceholders) {
-                builder.resolver(MiniPlaceholders.getAudienceGlobalPlaceholders(player));
+                builder.resolver(MiniPlaceholders.audienceGlobalPlaceholders());
             }
 
-            final Component message = miniMessage().deserialize(noPermissionMessage, builder.build());
+            final Component message = miniMessage().deserialize(noPermissionMessage, player, builder.build());
 
             this.logPlayerIntent(player, serverName);
 
