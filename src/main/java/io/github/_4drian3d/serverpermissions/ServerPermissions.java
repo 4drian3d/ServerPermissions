@@ -13,9 +13,12 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import io.github._4drian3d.serverpermissions.listener.ServerListener;
 import io.github._4drian3d.serverpermissions.utils.Constants;
-import org.slf4j.Logger;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
 
 import io.github._4drian3d.serverpermissions.config.Configuration;
+
+import static net.kyori.adventure.text.Component.text;
 
 @Plugin(
         id = "serverpermissions",
@@ -28,7 +31,7 @@ import io.github._4drian3d.serverpermissions.config.Configuration;
 )
 public final class ServerPermissions {
     @Inject
-    private Logger logger;
+    private ComponentLogger logger;
     @Inject
     @DataDirectory
     private Path path;
@@ -48,7 +51,7 @@ public final class ServerPermissions {
 
         injector.getInstance(ServerListener.class).register();
 
-        logger.info("ServerPermissions has been correctly started");
+        logger.info(text("ServerPermissions has been correctly started", NamedTextColor.GREEN));
     }
 
     public Configuration configuration() {

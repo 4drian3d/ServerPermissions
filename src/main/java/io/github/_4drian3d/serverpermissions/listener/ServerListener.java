@@ -93,7 +93,7 @@ public final class ServerListener implements AwaitingEventExecutor<ServerPreConn
             this.logPlayerIntent(player, serverName);
 
             // if it is the initial connection, we disconnect the player from the proxy so they do not time out
-            if (event.getPreviousServer() == null) {
+            if (oldServer == null) {
                 player.disconnect(message);
             } else {
                 player.sendMessage(message);
