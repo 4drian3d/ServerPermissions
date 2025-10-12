@@ -6,7 +6,7 @@ velocity = "3.4.0-SNAPSHOT"
 
 miniplaceholders  = "3.1.0"
 
-blossom = "2.1.0"
+blossom = "2.2.0"
 runvelocity = "3.0.2"
 
 [libraries]
