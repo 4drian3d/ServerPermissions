@@ -2,8 +2,8 @@
 Add permissions to access your servers
 
 ### Compatibility
-- Velocity 3.1.2+ Support
-- Java 17+
+- Velocity 4+ Support
+- Java 25+
 
 ### Permissions
 `serverpermissions.server.<server>`
